@@ -1,5 +1,6 @@
 import {commandId} from './command-id'
 import {backendOrigin} from './endpoint'
+import {connectionOptions,connectionErrorNotice} from './connection'
 import {ACCOUNT_KEY} from '../account/contracts'
 import {accessToken,currentAccount} from '../account/client'
 import {shallowRef,ref} from 'vue'
@@ -14,13 +15,13 @@ export interface TableSession {
   submit(action:Action,ticket:ActionTicket):boolean|Promise<boolean>;nextRound():boolean|Promise<boolean>;
 }
 export const SESSION_KEY='macheng-p3-session-v1'
-const messages:Record<string,string>={INVALID_SESSION:'会话已失效（可能本地服务已重启或保留时间已过），请重新创建或加入。',ROOM_EXISTS:'本地已有房间，请输入房间号加入。',ROOM_NOT_FOUND:'未找到该房间。',ROOM_FULL:'房间已满（最多四人）。',NOT_HOST:'只有当前房主可执行此操作。',NOT_READY:'需要四席齐全、至少两名真人在线，房主以外的三席全部准备。',WRONG_PHASE:'当前牌局阶段不允许此操作。',STALE_VERSION:'房间或牌局已更新，请按最新状态操作。',STALE_WINDOW:'响应窗口已更新，请重新选择。',ILLEGAL_ACTION:'当前操作不合法，已同步最新牌局。',RATE_LIMITED:'操作过于频繁，请稍后再试。',COMMAND_ID_REUSED:'操作编号冲突，请重新操作。'}
+const messages:Record<string,string>={INVALID_SESSION:'会话已失效（可能服务已重启或保留时间已过），请重新创建或加入。',ROOM_EXISTS:'服务端已有房间，请输入房间号加入。',ROOM_NOT_FOUND:'未找到该房间。',ROOM_FULL:'房间已满（最多四人）。',NOT_HOST:'只有当前房主可执行此操作。',NOT_READY:'需要四席齐全、至少两名真人在线，房主以外的三席全部准备。',WRONG_PHASE:'当前牌局阶段不允许此操作。',STALE_VERSION:'房间或牌局已更新，请按最新状态操作。',STALE_WINDOW:'响应窗口已更新，请重新选择。',ILLEGAL_ACTION:'当前操作不合法，已同步最新牌局。',RATE_LIMITED:'操作过于频繁，请稍后再试。',COMMAND_ID_REUSED:'操作编号冲突，请重新操作。'}
 export function createRoomClient(){
   const showMatchResults=ref(false)
-  const room=shallowRef<LobbySnapshot|null>(null),connected=ref(false),busy=ref(false),notice=ref('正在连接本地服务…')
+  const room=shallowRef<LobbySnapshot|null>(null),connected=ref(false),busy=ref(false),notice=ref('正在连接游戏服务…')
   let credential:{roomId:string;token:string}|null=null,replaced=false,receivedAt=performance.now(),seen='',generation=0
   try{const v=JSON.parse(sessionStorage.getItem(SESSION_KEY)??'null');if(v&&typeof v.roomId==='string'&&/^[a-f0-9]{64}$/.test(v.token))credential=v}catch{sessionStorage.removeItem(SESSION_KEY)}
-  const socket=io(backendOrigin||undefined,{auth:{token:accessToken()},autoConnect:false,transports:['websocket','polling'],reconnection:true,reconnectionDelay:800,reconnectionDelayMax:3000,timeout:5000})
+  const socket=io(backendOrigin||undefined,{auth:{token:accessToken()},autoConnect:false,...connectionOptions()})
   const id=commandId
   function apply(next:LobbySnapshot|null){
     if(next&&room.value?.roomId===next.roomId&&next.version<room.value.version)return
@@ -45,16 +46,16 @@ export function createRoomClient(){
       let reply:Reply<AdmissionData>
       try{reply=await send('lobby:admit',input)}catch(error){if(!socket.connected)throw error;reply=await send('lobby:admit',input)}
       if(started!==generation)return
-      if(reply.ok){credential={roomId:reply.data.snapshot.roomId,token:reply.data.token};sessionStorage.setItem(SESSION_KEY,JSON.stringify(credential));apply(reply.data.snapshot);connected.value=true;notice.value='已连接本地房间。'}
+      if(reply.ok){credential={roomId:reply.data.snapshot.roomId,token:reply.data.token};sessionStorage.setItem(SESSION_KEY,JSON.stringify(credential));apply(reply.data.snapshot);connected.value=true;notice.value='已连接房间。'}
       else rejectReply(reply)
     }catch{if(started===generation)notice.value='连接中断或请求未确认，请等待恢复后重试。'}finally{if(started===generation)busy.value=false}
   }
   socket.on('connect',()=>{
     connected.value=!credential
     if(credential&&!replaced)void admit({protocolVersion:1,commandId:id(),type:'resume',...credential})
-    else {notice.value='已连接，可创建或加入本地房间。';void recover()}
+    else {notice.value='已连接，可创建或加入房间。';void recover()}
   })
-  socket.on('connect_error',()=>{connected.value=false;notice.value='未连接本地服务，请先启动服务端；正在重试。'})
+  socket.on('connect_error',(error:Error)=>{connected.value=false;notice.value=connectionErrorNotice(error.message)})
   socket.on('disconnect',()=>{generation++;busy.value=false;connected.value=false;if(!replaced)notice.value='连接中断，保留当前牌面，正在恢复服务端会话…'})
   socket.on('account:expired',()=>{sessionStorage.removeItem(ACCOUNT_KEY);currentAccount.value=null;socket.disconnect()})
   socket.on('lobby:snapshot',apply)
