@@ -1,0 +1,52 @@
+name: Mahjong Pages
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the reviewed frontend
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: mahjong-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22.23.4'
+      - name: Verify approved static files
+        run: node scripts/verify-public-assets.mjs
+      - name: Install locked dependencies
+        run: |
+          npm install --global pnpm@9.15.9
+          pnpm --dir apps/table install --frozen-lockfile --ignore-scripts --network-concurrency=1 --child-concurrency=1
+      - name: Build frontend only
+        env:
+          MACHENG_PUBLIC_BASE: /Mahjong-Rebuild/
+          VITE_BACKEND_ORIGIN: https://192.236.205.34
+        run: |
+          pnpm --dir apps/table build
+          node -e "require('fs').cpSync('apps/table/licenses','apps/table/dist/licenses',{recursive:true})"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: apps/table/dist
+  deploy:
+    if: ${{ inputs.publish }}
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy frontend
+        id: deployment
+        uses: actions/deploy-pages@v4

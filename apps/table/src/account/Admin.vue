@@ -1,0 +1,13 @@
+<script setup lang="ts">
+import {ref,onMounted} from 'vue'
+import {accountRequest,currentAccount} from './client'
+import {AVATAR_IDS,avatarUrl,type AvatarOption} from './contracts'
+const props=defineProps<{standalone?:boolean}>(),emit=defineEmits<{created:[]}>()
+const options=ref<AvatarOption[]>([]);onMounted(async()=>{try{options.value=(await accountRequest('avatars')).avatars.filter((a:AvatarOption)=>a.enabled)}catch{message.value='头像库读取失败，请稍后刷新。'}})
+const open=ref(!!props.standalone),username=ref(''),password=ref(''),nickname=ref(''),avatar=ref('lotus'),busy=ref(false),message=ref('')
+async function create(){if(busy.value)return;busy.value=true;message.value='';try{await accountRequest('register',{username:username.value,password:password.value,nickname:nickname.value,avatar:avatar.value});message.value='账号已创建。请将用户名和初始密码告知本人，登录后可自行修改昵称、头像。';username.value='';password.value='';nickname.value='';emit('created')}catch(e){const code=(e as Error).message;message.value=code==='USERNAME_TAKEN'?'用户名已存在。':code==='INVALID_ACCOUNT'?'用户名需3–24位字母、数字或下划线；密码8–72位，名称1–16字。':code==='ADMIN_REQUIRED'?'只有管理员可以创建账号。':'创建失败，请检查登录状态或稍后重试。'}finally{busy.value=false}}
+</script>
+<template><div v-if="currentAccount?.admin" class="account-admin"><button v-if="!standalone" @click="open=!open">管理账号</button><form v-if="open" @submit.prevent="create"><h3>创建普通账号</h3><label>用户名<input v-model="username" aria-label="新账号用户名" autocomplete="off" maxlength="24" required /></label><label>初始密码<input v-model="password" aria-label="新账号初始密码" type="password" autocomplete="new-password" minlength="8" maxlength="72" required /></label><label>显示名称<input v-model="nickname" aria-label="新账号显示名称" maxlength="16" required /></label><div class="admin-avatars"><button v-for="item in options" :key="item.id" type="button" :aria-label="`新账号头像 ${item.id}`" :aria-pressed="avatar===item.id" @click="avatar=item.id"><img :src="avatarUrl(item.id)" alt="" /></button></div><p role="status">{{message}}</p><button :disabled="busy" type="submit">创建账号</button><button v-if="!standalone" type="button" @click="open=false;password=''">关闭账号管理</button></form></div></template>
+<style scoped>
+button{padding:8px;margin:4px;border:1px solid #b99b53;border-radius:6px;background:#aa8234;color:white}form{padding:12px;border:1px solid #7f9479;border-radius:8px}label{display:block;margin:10px 0}input{display:block;padding:8px;background:#0b2019;color:white;border:1px solid #7f9479}.admin-avatars{display:flex;flex-wrap:wrap}.admin-avatars button{background:#0b2019;padding:3px}.admin-avatars img{width:48px;height:48px}.admin-avatars [aria-pressed=true]{outline:3px solid #dfbd68}p{font-size:13px;line-height:1.6}
+</style>

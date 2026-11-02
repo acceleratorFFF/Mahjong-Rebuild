@@ -1,0 +1,12 @@
+<script setup lang="ts">
+import {ref,onMounted,onBeforeUnmount} from 'vue'
+defineProps<{online?:boolean;settled?:boolean;busy?:boolean;error?:string}>()
+const emit=defineEmits<{cancel:[];confirm:[]}>(),panel=ref<HTMLElement>(),previous=document.activeElement as HTMLElement|null
+onMounted(()=>panel.value?.querySelector<HTMLButtonElement>('button')?.focus())
+onBeforeUnmount(()=>previous?.isConnected&&previous.focus())
+function trap(event:KeyboardEvent){const buttons=Array.from(panel.value?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')??[]);if(!buttons.length)return;const first=buttons[0],last=buttons[buttons.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}
+</script>
+<template><div class="exit-backdrop" @click.self="!busy&&emit('cancel')"><section ref="panel" class="exit-dialog" role="dialog" aria-modal="true" aria-labelledby="exit-title" aria-describedby="exit-description" @keydown.esc="!busy&&emit('cancel')" @keydown.tab="trap"><h2 id="exit-title">返回主菜单？</h2><p id="exit-description">{{online?(settled?'返回菜单后可从“返回本场”查看本场结果。':'返回菜单将暂离并进入托管，本场席位和积分保留；可从“返回本场”恢复。'):(settled?'本局已结算。返回菜单后，本次单机积分不会保存。':'返回菜单将结束当前单机牌局，本次进度与积分不会保存。')}}</p><p v-if="error" role="alert">{{error}}</p><div class="exit-actions"><button :disabled="busy" @click="emit('cancel')">继续留在牌桌</button><button :disabled="busy" @click="emit('confirm')">{{busy?'正在返回…':'确认返回菜单'}}</button></div></section></div></template>
+<style scoped>
+.exit-backdrop{position:fixed;inset:0;z-index:650;display:grid;place-items:center;background:#04140fd9;padding:16px;color:#fff2cb}.exit-dialog{width:min(100%,480px);max-height:calc(100dvh - 32px);overflow:auto;padding:24px;background:linear-gradient(135deg,#123d32,#071f1c);border:1px solid #d6ad61;border-radius:16px;box-shadow:0 12px 40px #0008}.exit-dialog h2{margin:0 0 14px;font-size:24px;color:#ffe7a2}.exit-dialog p{font-size:15px;line-height:1.7}.exit-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}.exit-actions button{flex:1;min-height:44px;min-width:150px;border:1px solid #d6ad61;border-radius:8px;padding:10px;background:#164735;color:#fff2cb;font:inherit}.exit-actions button:last-child{background:linear-gradient(#edc772,#ad7c2c);color:#30210a}.exit-actions button:focus-visible{outline:3px solid #ffe7a2;outline-offset:3px}
+</style>

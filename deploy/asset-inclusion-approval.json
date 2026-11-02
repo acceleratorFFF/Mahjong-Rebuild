@@ -1,0 +1,216 @@
+{
+  "date": "2026-11-02",
+  "basis": "User explicitly confirmed the existing 34 tile faces are usable. Preserve upstream trace and notices; this records inclusion permission, not independent authorship verification. Other eight assets retain their existing provenance and attribution conditions.",
+  "files": [
+    {
+      "file": "avatars/ah-lok.svg",
+      "sha256": "e393592a0df1fb6299061ce6b3e6b638b5d372d698beaf6938ca1c28c8ebebc4",
+      "category": "DICEBEAR_CC_BY_4_0_NOTICE_REQUIRED"
+    },
+    {
+      "file": "avatars/lotus.svg",
+      "sha256": "0101b293a03b59f58ab9c83fa35f47457fa2d0a548c6955cef0dea7360e3bbc5",
+      "category": "DICEBEAR_CC_BY_4_0_NOTICE_REQUIRED"
+    },
+    {
+      "file": "avatars/shisan.svg",
+      "sha256": "83b5ee899684bd48dfe9353a94df3f5f9cc8cd24555d90eb88ef009afa761e1a",
+      "category": "DICEBEAR_CC_BY_4_0_NOTICE_REQUIRED"
+    },
+    {
+      "file": "avatars/young-master.svg",
+      "sha256": "b81807e9f0417c0efd5b128842dfa524242a064d172241d07a9dbd38e9d5a5d6",
+      "category": "DICEBEAR_CC_BY_4_0_NOTICE_REQUIRED"
+    },
+    {
+      "file": "menu/online-icon.png",
+      "sha256": "cdc0c3713c638bc63babbb2d88ad921effb89ed648328cbe385776a7c7e905ba",
+      "category": "USER_CONFIRMED_CHATGPT_GENERATED_20261101"
+    },
+    {
+      "file": "menu/pavilion.png",
+      "sha256": "8443748ca1bf2544153a69ab0def6cad26839b3a02e5a581220d69cc6507eee2",
+      "category": "GENERATED_BACKGROUND_RECORDED"
+    },
+    {
+      "file": "menu/single-icon.png",
+      "sha256": "0b2baf3d69fe3f895d62979fd86f88f8735ca4701c5f3d2248d50d0a6269663f",
+      "category": "USER_CONFIRMED_CHATGPT_GENERATED_20261101"
+    },
+    {
+      "file": "menu/title.png",
+      "sha256": "c8e48ed99ad1bf87e8f180e627330ee4d53f110caa2a62bcee5f078e8bb287fe",
+      "category": "USER_CONFIRMED_CHATGPT_GENERATED_20261101"
+    },
+    {
+      "file": "tiles/1m.png",
+      "sha256": "9bcdbac635c3ac28cb73910339a08c779dca999eb4a7a1eb9f1ceaa8584caba4",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/1p.png",
+      "sha256": "021ecad5557a605ff8166b87ce5ddac16db0b6aef00ce547d7e793da2cadb210",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/1s.png",
+      "sha256": "015791685378062055bc54a65dddb8a4bcbfed917452bf79c978885f1db24f8a",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/1z.png",
+      "sha256": "3f87eec7376679460b6fb4f38048f0844096364d795edc3aaaf94fd936f339b3",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/2m.png",
+      "sha256": "b8361d5ebfcc01f144dfbad05ef72da28250977f33fba064a640a108afa24e26",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/2p.png",
+      "sha256": "4a8429654c542fa305f2d2bcefb10e3afd337bbc19b5e002a9c65090df8584d6",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/2s.png",
+      "sha256": "577ef8776ef2fc1a82415882a43c7e165cf6a20e3825c96d0c98c261fd48e826",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/2z.png",
+      "sha256": "29c0af92e013b0f59bf825b182b319f3c50150d8404520cb2ffd4d59813d435c",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/3m.png",
+      "sha256": "4d1e5a2b36359dba0f624ef18eeeba84c4d6cc2e539f432539cd023013b843db",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/3p.png",
+      "sha256": "0a5430378d45dfdfa2aadf751ef2a955242d5b5df9d0bcb6ac166304a1c030f9",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/3s.png",
+      "sha256": "753fa47f7c2bf676f8711fbbdeff085198cb5d6f59735fa57b9c7f6eca637840",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/3z.png",
+      "sha256": "15ab19c5c9beeedce29d774eee3b1ad2cdbeb9a0e3859d62dbae22b4249f9fea",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/4m.png",
+      "sha256": "21297a8b769dac6df21527d976e09be2de75985dec5acbe1e6f2958ed02e6fef",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/4p.png",
+      "sha256": "d75a9f6d7568955927aca49d4b600939d577e645a5afd54e694d5ad0890f352b",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/4s.png",
+      "sha256": "63edae4e5bcefb2a7973658a2be5e273dd1f302455d4b7eb014fd4def39ff354",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/4z.png",
+      "sha256": "9f639d3b6d5ec9e6cf39d63bcb02bcb36975f56cf834961a735040d042bc2224",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/5m.png",
+      "sha256": "86137710e80303f39753ec9ffa27e071dbb3055ee55884173f6bda197d2f956d",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/5p.png",
+      "sha256": "d6910b8b9bf1027af5b01a9ffd5155a277db638faef35bb590dd0394e2c47b9a",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/5s.png",
+      "sha256": "a07f2dfc66fe8a15dc42aa71141a6dd6bcf76accce4ae1552662bc78e356b4a4",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/5z.png",
+      "sha256": "604650e48fac9f4ce37e7c59cc86a64f49f8259b40b7cecdbdf7aa1a33c338a6",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/6m.png",
+      "sha256": "d6d1ab03afd752c793e6887623f17586144b96f7dd1250bfd893bea83dd861ff",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/6p.png",
+      "sha256": "8fff6ab5063d6146b9d18d5e92ba979661123c2085646327603876ffa99b5720",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/6s.png",
+      "sha256": "35bea705e945af27c5fed9ec64ef5e68696ce9febc1f5783602111367c48ed1c",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/6z.png",
+      "sha256": "298193ca3873b3b42e99bf2a42714483b60d7aafb20bb8e3aec9c01473b0331e",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/7m.png",
+      "sha256": "aee55a3ca32daf06a85c6daf92ed0f445f7ffe46f45ea59f1433e9b84bfb5ccb",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/7p.png",
+      "sha256": "ca6b2205d2ef1878acb2b8b083d9be3286525132c3adb2ec50f419cf642db98f",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/7s.png",
+      "sha256": "567dc6fc1d0fd37d15b810f985df0a84785d563bb8f660ca2cf4979c169194f9",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/7z.png",
+      "sha256": "579652e2280019b5181970cf72d723b77f956b332f1626d015d32f5d72c444d1",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/8m.png",
+      "sha256": "cfef2e20a6ad7a32103af531791931ffd23d6988f70aa6a13317ced351985da2",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/8p.png",
+      "sha256": "bda811f7c6464f4eedcb6a580e3feabcd97d053eea3e86a9dc204196a37f09c3",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/8s.png",
+      "sha256": "0ab29f80cf9c872db48cd72683eb5f9397ce1500e5a4fd9e22efc13a9eac83d8",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/9m.png",
+      "sha256": "cdaf1e2e92f67f9af43e9836969123cbc5037e515d89f2c68411d81a7f0f8327",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/9p.png",
+      "sha256": "6ff5021e2d33d5180c49a1dea002db1561682ea50c125ec5a40e9ad7c5d223dd",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "file": "tiles/9s.png",
+      "sha256": "fe0e9431e2a1347c76b4e83f5e6384c86729d369cbc8d6651216a856db6053d1",
+      "category": "USER_CONFIRMED_TILE_USE_20261102"
+    }
+  ]
+}

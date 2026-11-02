@@ -1,0 +1,9 @@
+node_modules/
+dist/
+dist-server/
+dist-release-server/
+.local/
+.env*
+*.key
+*.pem
+*.pfx

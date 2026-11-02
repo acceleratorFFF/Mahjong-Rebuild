@@ -1,0 +1,13 @@
+/* Native panning and pinch zoom stay available; repeated UI taps are actions. */
+:is(.account-gate, .menu-surface, .connection-cover, .room-connection),
+:is(.account-gate, .menu-surface, .connection-cover, .room-connection) :is(button, a, summary) {
+  touch-action: manipulation;
+}
+
+/* Keep mobile form text readable without Safari's small-text focus zoom.
+   Deliberately outrank compact scoped rules; do not constrain viewport zoom. */
+@media (pointer: coarse), (max-width: 1024px) {
+  :is(.account-gate, .menu-surface) :is(input, select, textarea) {
+    font-size: max(16px, 1em) !important;
+  }
+}
