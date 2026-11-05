@@ -70,6 +70,8 @@ export interface TableTheme {
   staticTableCastShadow?: boolean
   /** 外部桌布图片；优先级高于 tableFelt / tableVignette 的程序纹理。 */
   tableSurfaceTexture?: TableSurfaceTextureConfig
+  /** 仅替换现有托边材质贴图，不改变桌框几何。 */
+  tableFrameTexture?: TableSurfaceTextureConfig
   /** 木质包边：台面四周一圈程序木纹框，与 plainSurface 配合。 */
   woodTrim?: boolean
   /** 木纹三段颜色（canvas 程序纹理），不传用默认深棕。 */

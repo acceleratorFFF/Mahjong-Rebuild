@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import {selectedLocalLighting} from '../../theme/localLighting'
+import {selectedTableSkin} from '../../theme/localTableSkin' 
 import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 import MahjongTile from '../MahjongTile.vue'
 import PlayerSeat from '../PlayerSeat.vue'
@@ -266,7 +268,7 @@ const hoveredDiscard = ref<TileType | null>(null)
 const kongPickerOpen = ref(false)
 const chiPickerOpen = ref(false)
 
-watch(() => props.themeName, () => {
+watch(() => [props.themeName,selectedTableSkin.value,selectedLocalLighting.value], () => {
   tableLoadRetry.reset()
   tableReady.value = false
   tableLoadError.value = ''
@@ -573,7 +575,9 @@ function onAvatarError(entry: GamePlayer) {
     :data-meld-tile-counts="tableMeldTilesData"
   >
     <MahjongTable3D
-      :key="`${themeName}:${tableLoadAttempt}`"
+      :key="`${themeName}:${selectedTableSkin}:${selectedLocalLighting}:${tableLoadAttempt}`"
+      :surface-skin="selectedTableSkin"
+      :lighting-mode="selectedLocalLighting"
       :theme-name="themeName"
       :players="players" :local-seat="user.seat" :current-player="currentPlayer" :last-discard="lastDiscard"
       :wall="wall" :wall-head-drawn="wallHeadDrawn" :wall-count="wallCount"

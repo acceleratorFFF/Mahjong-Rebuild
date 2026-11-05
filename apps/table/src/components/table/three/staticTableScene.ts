@@ -24,6 +24,7 @@ interface TableSceneOptions {
   theme?: TableTheme
   /** 已解码的外部桌布纹理；存在时优先于程序化桌面纹理。 */
   surfaceTexture?: THREE.Texture
+  frameTexture?: THREE.Texture
   /** 主题牌背位图；缺失时回退到程序化渐变。 */
   tileBackTexture?: THREE.Texture
   own<T>(resource: T): T
@@ -839,7 +840,7 @@ function addTable() {
         : {}),
   }))
   const darkJade = own(tileMaterial({ ...theme.table.darkJade }))
-  const gold = own(tileMaterial({ ...theme.table.gold }))
+  const gold = own(tileMaterial({ ...theme.table.gold, ...(options.frameTexture ? {map:options.frameTexture} : {}) }))
   const goldHighlight = own(tileMaterial({ ...theme.table.goldHighlight }))
   const machine = own(tileMaterial({ ...theme.table.machine }))
   scene.userData.tileSide = trackTileMaterial(own(tileMaterial({

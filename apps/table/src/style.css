@@ -358,7 +358,7 @@ button { font: inherit; }
   background-size: 89% 89%;
   background-position: center 44%;
   background-repeat: no-repeat;
-  box-shadow: 0 4px 0 #d8ddd2, 0 7px 0 #4e9b43, 0 11px 8px rgba(0,0,0,.52), inset 0 1px rgba(255,255,255,.9);
+  box-shadow: 0 4px 0 #d8ddd2, 0 7px 0 var(--tile-body-color, #4e9b43), 0 11px 8px rgba(0,0,0,.52), inset 0 1px rgba(255,255,255,.9);
   filter: brightness(.9);
   cursor: pointer;
   transform-style: preserve-3d;
@@ -839,8 +839,8 @@ button { font: inherit; }
 /* 强透视桌面：按参考视频的上窄下宽镜头重构整张牌桌 */
 
 
-.mahjong-tile { --tile-width: clamp(44px, 4.75vw, 86px); box-shadow: 0 5px 0 #d8ddd2, 0 9px 0 #4e9b43, 0 13px 9px rgba(0,0,0,.54), inset 0 1px rgba(255,255,255,.9); }
-.mahjong-tile.small { --tile-width: clamp(25px, 2.45vw, 42px); box-shadow: 0 3px 0 #d5dbd0, 0 6px 0 #4c9341, 0 8px 5px rgba(0,0,0,.5); position: relative; top: -3px; }
+.mahjong-tile { --tile-width: clamp(44px, 4.75vw, 86px); box-shadow: 0 5px 0 #d8ddd2, 0 9px 0 var(--tile-body-color, #4e9b43), 0 13px 9px rgba(0,0,0,.54), inset 0 1px rgba(255,255,255,.9); }
+.mahjong-tile.small { --tile-width: clamp(25px, 2.45vw, 42px); box-shadow: 0 3px 0 #d5dbd0, 0 6px 0 var(--tile-body-color, #4c9341), 0 8px 5px rgba(0,0,0,.5); position: relative; top: -3px; }
 
 .seat-top { top: 13%; transform: translateX(calc(115% - 140px)); }
 .seat-top .avatar-wrap { width: clamp(210px, 18vw, 286px); min-width: 0; }
@@ -853,7 +853,7 @@ button { font: inherit; }
 .user-identity { left: -3.3%; bottom: 40px; }
 .user-melds { bottom: clamp(112px, 15vh, 148px); }
 .hand-rack { min-height: 112px; gap: clamp(1px,.15vw,3px); padding: 12px 16px 8px; }
-.hand-rack .mahjong-tile { box-shadow: 0 6px 0 #d8ddd2, 0 10px 0 #4e9b43, 0 15px 9px rgba(0,0,0,.6), inset 0 1px rgba(255,255,255,.9); }
+.hand-rack .mahjong-tile { box-shadow: 0 6px 0 #d8ddd2, 0 10px 0 var(--tile-body-color, #4e9b43), 0 15px 9px rgba(0,0,0,.6), inset 0 1px rgba(255,255,255,.9); }
 .hand-rack .hand-tile-slot.drawn { margin-left: clamp(10px, 1vw, 18px); }
 
 
@@ -3694,3 +3694,5 @@ button { font: inherit; }
     transition: none !important;
   }
 }
+
+

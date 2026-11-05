@@ -1,3 +1,4 @@
+import type {LocalTableSkin} from '../../../theme/localTableSkin'
 import type { DealAnimation, LastDiscard, OpeningStage, WinEffect } from '../../../game/core/contracts/gamePort'
 import type { GamePlayer, TableActionEvent, TileType, WinPresentation } from '../../../game/core/contracts/types'
 import type { TableThemeName } from './tableTheme'
@@ -6,6 +7,8 @@ import type { WinPileBatch } from './bloodFlowWinPile'
 import type { BloodFlowCue } from '../../../game/variants/lotus/bloodFlow/presentation'
 
 export interface TableProps {
+  lightingMode?:import('../../../theme/localLighting').LocalLighting
+  surfaceSkin?:LocalTableSkin
   machengSpecials?: {pizi:TileType;laizi:TileType}
   /** 血流胡牌牌堆（盖楼）：实时给完整 WinBatch，回放给按"胡"步累积的结构子集。 */
   bloodFlowBatches?: readonly WinPileBatch[]

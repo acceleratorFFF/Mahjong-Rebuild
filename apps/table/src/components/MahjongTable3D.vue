@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import {localLightingProfile} from '../theme/localLighting'
+import {surfaceSkinTheme} from './table/three/localSurfaceSkin'
+import {localSkinBackUrl} from '../theme/localTableSkin'
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import * as THREE from 'three'
 import {tablePixelRatio} from './table/three/renderResolution'
@@ -172,9 +175,11 @@ async function loadTableSurfaceTexture(theme: TableTheme | undefined) {
 }
 
 async function loadTileBackTexture(themeName: TileAssetTheme) {
-  if (themeName !== 'llmAnime') return undefined
+  const skinBack=localSkinBackUrl(props.surfaceSkin??'classic')
+  if (!skinBack && themeName !== 'llmAnime') return undefined
   try {
-    const texture = await new THREE.TextureLoader().loadAsync(tileBackUrl(themeName))
+    const texture = await new THREE.TextureLoader().loadAsync(skinBack??tileBackUrl(themeName))
+    if(destroyed){texture.dispose();return undefined}
     texture.colorSpace = THREE.SRGBColorSpace
     texture.wrapS = texture.wrapT = THREE.ClampToEdgeWrapping
     texture.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8)
@@ -382,14 +387,14 @@ onMounted(async () => {
   const activeThemeName = (props.themeName ?? new URLSearchParams(window.location.search).get('theme') ?? 'jade') as TileAssetTheme
   // llmAnime 默认走二次元 cel；?animeTable=0 可强制关闭回退写实 PBR。
   animeTable = activeThemeName === 'llmAnime' && new URLSearchParams(window.location.search).get('animeTable') !== '0'
-  const activeTheme = tableThemeByName(activeThemeName)
+  const activeTheme = surfaceSkinTheme(props.surfaceSkin??'classic',tableThemeByName(activeThemeName))
   // 真机降低牌体圆角细分（segments→2）：RoundedBoxGeometry 三角面数随 segments² 增长，
   // 是 494k 三角面的主要来源之一；桌面保持原细分（llmAnime=4）。
   if (isMobileLike) {
     const base = activeTheme.tileGeometry ?? { segments: 6, baseRadius: .07, capRadius: .072 }
     activeTheme.tileGeometry = { ...base, segments: 2 }
   }
-  renderProfile = tableSceneRenderProfile(activeThemeName)
+  renderProfile = localLightingProfile(tableSceneRenderProfile(activeThemeName),props.lightingMode??'original')
 
   // 真机性能：触屏设备把 llmAnime 的 VSM 2048 软阴影降为 PCFSoft 1024，
   // 并用半球光+主光提亮来补偿去掉的面光（RectAreaLight LTC 极贵）。
@@ -433,7 +438,7 @@ onMounted(async () => {
 
   scene = new THREE.Scene()
   // 雾推到桌身之外（桌角最远约 30）：让整张桌（含对家远侧）都在雾区外，只让背景淡出。
-  scene.fog = renderProfile.fog ? new THREE.Fog(0x03100b, 32, 60) : null
+  scene.fog = renderProfile.fog ? new THREE.Fog(props.lightingMode==='neutral'?0x080808:0x03100b, 32, 60) : null
   if (!cheapTable) {
     const pmremGenerator = new THREE.PMREMGenerator(renderer)
     const roomEnvironment = new RoomEnvironment()
@@ -470,9 +475,11 @@ onMounted(async () => {
   scene.add(keyLight.target)
   shadowLight = keyLight
   const surfaceTexture = await loadTableSurfaceTexture(activeTheme)
+  // 沿用贴图加载及卸载释放边界；仅注入原桌框材质。
+  const frameTexture = activeTheme?.tableFrameTexture ? await loadTableSurfaceTexture({...activeTheme,tableSurfaceTexture:activeTheme.tableFrameTexture}) : undefined
   const tileBackTexture = await loadTileBackTexture(activeThemeName)
   if (destroyed) return
-  const rimLight = new THREE.DirectionalLight(activeTheme?.rimLight?.color ?? 0x3acb8b, activeTheme?.rimLight?.intensity ?? 1.6)
+  const rimLight = new THREE.DirectionalLight(props.lightingMode==='neutral'?0xffffff:(activeTheme?.rimLight?.color ?? 0x3acb8b), activeTheme?.rimLight?.intensity ?? 1.6)
   rimLight.position.set(8, 5, -8)
   scene.add(rimLight)
   // 移除了 goldFill（点光源，每片元开销最大）与 tileHighlight（与 keyLight 同向的微弱重复）。
@@ -484,6 +491,7 @@ onMounted(async () => {
     playAreaOffsetZ: PLAY_AREA_OFFSET_Z,
     theme: activeTheme,
     surfaceTexture,
+    frameTexture,
     tileBackTexture,
     own,
     ownDynamic,
@@ -707,5 +715,5 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <canvas ref="canvas" class="mahjong-scene" :data-table-theme="props.themeName ?? 'jade'" aria-hidden="true"></canvas>
+  <canvas ref="canvas" class="mahjong-scene" :data-table-theme="props.themeName ?? 'jade'" :data-surface-skin="props.surfaceSkin??'classic'" :data-lighting="props.lightingMode??'original'" aria-hidden="true"></canvas>
 </template>

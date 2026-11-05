@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-02",
-  "basis": "User explicitly confirmed the existing 34 tile faces are usable. Preserve upstream trace and notices; this records inclusion permission, not independent authorship verification. Other eight assets retain their existing provenance and attribution conditions.",
+  "date": "2026-11-06",
+  "basis": "User explicitly confirmed the existing 34 tile faces are usable. Preserve upstream trace and notices; this records inclusion permission, not independent authorship verification. Other eight assets retain their existing provenance and attribution conditions. User explicitly authorized publishing five themes, neutral lighting and the new theme control on 2026-11-06. New assets are AI-generated bamboo/moon textures and user-supplied sakura/butterfly flat sheets; not independent rights verification.",
   "files": [
     {
       "file": "avatars/ah-lok.svg",
@@ -211,6 +211,56 @@
       "file": "tiles/9s.png",
       "sha256": "fe0e9431e2a1347c76b4e83f5e6384c86729d369cbc8d6651216a856db6053d1",
       "category": "USER_CONFIRMED_TILE_USE_20261102"
+    },
+    {
+      "category": "USER_APPROVED_THEME_20261106",
+      "file": "themes/bamboo-jade/v1/felt.png",
+      "sha256": "b542e4371fe462e93cf02f667245f1b556af5dc15eda4ffddc3eb25d10f4d58e"
+    },
+    {
+      "category": "USER_APPROVED_THEME_20261106",
+      "file": "themes/bamboo-jade/v1/tile-back.png",
+      "sha256": "3e7af2f0d6a8ce3f3051794c30ec62ce71aa1e035f4fd02d0dd1b8acea52b046"
+    },
+    {
+      "category": "USER_APPROVED_THEME_20261106",
+      "file": "themes/butterfly-gold/v1/felt.png",
+      "sha256": "d139c4ba41a9adfc8890f79a894f8025410c3fd876ac23fa8d34e77b4a006692"
+    },
+    {
+      "category": "USER_APPROVED_THEME_20261106",
+      "file": "themes/butterfly-gold/v1/tile-back.png",
+      "sha256": "bc0ee804572a7f5499cb3c0578103dab48dd6b8747d3c13ed4c3014f03086802"
+    },
+    {
+      "category": "USER_APPROVED_THEME_20261106",
+      "file": "themes/butterfly-gold/v1/wood.png",
+      "sha256": "bebb889b26bdcaee44b687223bfac1793a69209404cdb706e2e585d94d91e16a"
+    },
+    {
+      "category": "USER_APPROVED_THEME_20261106",
+      "file": "themes/moon-navy/v1/felt.png",
+      "sha256": "ae7f61e5f25f8f11314acbb015d46fa2d5fe95f9519bb55ec8f3056d9aba9d2f"
+    },
+    {
+      "category": "USER_APPROVED_THEME_20261106",
+      "file": "themes/moon-navy/v1/tile-back.png",
+      "sha256": "7aecea0ff7e580194d907e8aa8587962e87650969fb5e8485906ec2977b24f6d"
+    },
+    {
+      "category": "USER_APPROVED_THEME_20261106",
+      "file": "themes/sakura-plum/v1/felt.png",
+      "sha256": "c12e4b01ab1bc307f99a83b009e692b7b6d68e86c4dcc30b0c3b05e13c4ab208"
+    },
+    {
+      "category": "USER_APPROVED_THEME_20261106",
+      "file": "themes/sakura-plum/v1/tile-back.png",
+      "sha256": "03a8e91bd71acab3994a41a230c2e5a3a9ed2868386a3104d8373ec414fa1858"
+    },
+    {
+      "category": "USER_APPROVED_THEME_20261106",
+      "file": "themes/sakura-plum/v1/wood.png",
+      "sha256": "9db819b8e98cada866d14dd552b4eb9bf71ed5a0fd92c4e2cc0cb762fde91c31"
     }
   ]
 }

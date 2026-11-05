@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {selectedTableSkin,localSkinBackUrl} from '../theme/localTableSkin'
 import { computed } from 'vue'
 import { TILE_META } from '../game/core/rules/tiles'
 import { tileBackUrl, tileFaceUrl, type TileAssetTheme } from '../game/core/presentation/tileAssets'
@@ -70,17 +71,20 @@ const tileLabel = computed(() => {
   return `${meta.value.name}，${role}${isWildcard.value ? '，可代本局精牌' : ''}`
 })
 const tileStyle = computed(() => {
+  const body={'--tile-body-color': {'classic':'#4e9b43','bamboo-jade':'#377466','moon-navy':'#536c89','sakura-plum':'#68475f','butterfly-gold':'#9a794d'}[selectedTableSkin.value]}
+
   if (shownTile.value === 'back') {
-    return { '--tile-back-image': `url("${tileBackUrl(props.themeName)}")` }
+    return { ...body, '--tile-back-image': `url("${localSkinBackUrl(selectedTableSkin.value)??tileBackUrl(props.themeName)}")` }
   }
   // 优先用预加载的内存 blob URL；预加载未完成时回退网络地址（浏览器缓存兜底）
-  return { backgroundImage: `url("${tileFaceUrl(shownTile.value as TileType, props.themeName)}")` }
+  return { ...body, backgroundImage: `url("${tileFaceUrl(shownTile.value as TileType, props.themeName)}")` }
 })
 </script>
 
 <template>
   <div
     class="mahjong-tile"
+    :data-surface-skin="selectedTableSkin"
     :class="{ selected, drawn, disabled, small, 'tile-back': shownTile === 'back', joker: (isPrecision || isWhiteJoker) && !hidden, wildcard: isWildcard && !hidden, laizi: isLaizi && !hidden, red: tile === 'red' && !hidden }"
     :style="tileStyle"
     role="button"
@@ -99,3 +103,21 @@ const tileStyle = computed(() => {
 <style scoped>
 .macheng-mark{position:absolute;right:1px;top:1px;z-index:2;min-width:1.05em;padding:1px 2px;border-radius:3px;background:#855018;color:#fff7cf;font:700 clamp(9px,1.1vw,14px)/1.05 sans-serif;text-align:center;box-shadow:0 0 1px #241500}.macheng-mark[data-tile-role="laizi"]{background:#216449;color:#e2ffdf}
 </style>
+
+<style scoped>
+.mahjong-tile.tile-back[data-surface-skin="moon-navy"]::before,.mahjong-tile.tile-back[data-surface-skin="bamboo-jade"]::before{border-color:#b99a60;background:#1f665a var(--tile-back-image) center/cover no-repeat}
+</style>
+
+<style scoped>
+.mahjong-tile.tile-back[data-surface-skin="moon-navy"]::before{border-color:#b5c4ce;background-color:#203e63}
+</style>
+
+<style scoped>
+.mahjong-tile.tile-back[data-surface-skin="sakura-plum"]::before{border-color:#dca1c4;background:#49203f var(--tile-back-image) center/cover no-repeat}
+</style>
+
+
+<style scoped>
+.mahjong-tile.tile-back[data-surface-skin="butterfly-gold"]::before{border-color:#eed7a0;background:#88633e var(--tile-back-image) center/cover no-repeat}
+</style>
+

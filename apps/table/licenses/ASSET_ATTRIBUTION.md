@@ -30,3 +30,9 @@
 2026-11-01最新：用户明确允许替换2个旧顶栏图标，mute.png／manual.png已删除，改为GameShellHeader内项目自写SVG。当前public42文件，34张牌面原样保留且待核；源码中的SVG不依赖原PNG。来源追溯与替换记录见docs/ASSET_TRACE_AND_ICONS.md（源码仓库路径）。
 
 2026-11-02最新：用户明确确认当前34张牌面可用，按固定文件哈希记录为USER_CONFIRMED_TILE_USE_20261102，保留固定上游来源与MIT文本。此为用户对纳入本项目的确认，不宣称已独立核实原作者或获得新的上游授权；前文待核为此前审查结论。当前42媒体，天气及2旧PNG不再分发，其余素材来源与署名条件不变。
+
+2026-11-04本地主题预览：public/themes/bamboo-jade/v1/felt.png和tile-back.png由本项目使用内置image_gen全新生成，原提示词及哈希记录在源码docs/design/bamboo-jade与docs/evidence/p4-bamboo-jade。仅供本地试装，未纳入既有公网素材放行清单；不替换34牌面或既有素材。
+
+2026-11-04月白藏蓝本地试装：public/themes/moon-navy/v1/felt.png和tile-back.png由本项目使用内置image_gen分别生成，原样接入；来源、提示词和SHA256见源码docs/design/moon-navy/LOCAL_ASSET_PROMPTS.md与docs/evidence/p4-moon-navy/ASSETS.json。仅本地，未纳入既有公网素材批准清单，34张牌面未改。
+
+2026-11-06发布确认：用户明确要求新增暖蝶金木并发布五套主题、中性光与新切换按钮。竹影青玉／月白藏蓝为本项目image_gen生成；紫樱绛木／暖蝶金木由用户提供平面素材合集，按区域分离、去白分隔，未重绘，未独立核实生成工具及权利来源。新增10张主题贴图按deploy/asset-inclusion-approval.json逐文件哈希纳入；此前仅本地限制由本次用户明确要求替代。保留原牌面、MIT、头像等署名。

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import SkinPreviewControls from '../../theme/SkinPreviewControls.vue'
+import {skinPreviewEnabled} from '../../theme/localTableSkin'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { BASE_SCORE } from '../../game/core/rules/rules'
 import type { GameMode } from '../../game/core/contracts/activeGamePort'
@@ -131,7 +133,8 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <nav>
-      <div v-if="!minimalControls" ref="themePicker" class="theme-picker">
+      <SkinPreviewControls v-if="gameMode === 'local'" />
+      <div v-if="!minimalControls && !skinPreviewEnabled" ref="themePicker" class="theme-picker">
         <button
           class="theme-toggle topbar-control"
           :class="{ locked: themeLocked }"
